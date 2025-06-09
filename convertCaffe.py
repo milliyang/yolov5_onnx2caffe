@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import print_function
 
 import sys
@@ -141,14 +143,23 @@ def getGraph(onnx_path):
     graph = graph.transformed(transformers)
     graph.channel_dims = {}
 
+    ###leoleo
+    # refer: https://blog.csdn.net/evm_doc/article/details/146124218
+    for i in range(0, len(graph.nodes)):
+        name = graph.nodes[i].name
+        name = name.replace('.', '_')
+        graph.nodes[i].name = name.replace('/', '_')
+    ###leoleo
+
     return graph
 
 
 if __name__ == "__main__":
 
-    onnx_path = "/home/willer/yolov5-4.0/models/models_not_focus/yolov5s-simple.onnx"
-    prototxt_path = "./yolov5s-4.0-not-focus.prototxt"
-    caffemodel_path = "./yolov5s-4.0-not-focus.caffemodel"
+    #onnx_path = "/workspace/yolov5/best-sim.onnx"
+    onnx_path = "/workspace/nnie/yolov5/best-sim.onnx"
+    prototxt_path = "./yolov5n.prototxt"
+    caffemodel_path = "./yolov5n.caffemodel"
 
     #onnx_path = "/home/willer/nanodet_concat/tools/nanodet-simple.onnx"
     #prototxt_path = "./nanodet-simple.prototxt"
@@ -156,8 +167,8 @@ if __name__ == "__main__":
 
     graph = getGraph(onnx_path)
 
-    convertToCaffe(graph, prototxt_path, caffemodel_path, exis_focus=True, focus_concat_name="Concat_40", focus_conv_name="Conv_41")
+    #convertToCaffe(graph, prototxt_path, caffemodel_path, exis_focus=True, focus_concat_name="Concat_40", focus_conv_name="Conv_41")
     #convertToCaffe(graph, prototxt_path, caffemodel_path, exis_focus=True, focus_concat_name="Concat_40")
     #convertToCaffe(graph, prototxt_path, caffemodel_path, focus_conv_name="Conv_41")
-    #convertToCaffe(graph, prototxt_path, caffemodel_path)
+    convertToCaffe(graph, prototxt_path, caffemodel_path)
 

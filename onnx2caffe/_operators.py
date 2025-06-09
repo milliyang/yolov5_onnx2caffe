@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -123,6 +125,14 @@ def _convert_sigmoid(node, graph, err):
     output_name = str(node.outputs[0])
     name = str(node.name)
 
+    print("Processing Sigmoid layer: {} -> {}".format(input_name, output_name))
+    
+    # 确保输入名称存在
+    if input_name not in graph.channel_dims:
+        print("Warning: {} not found in channel_dims, using default".format(input_name))
+        #graph.channel_dims[input_name] = graph.channel_dims.get(output_name, 1)
+        
+        
     if input_name == output_name:
         inplace = True
     else:
@@ -392,7 +402,7 @@ def _convert_upsample(node,graph,err):
     mode = node.attrs["mode"]
     print(mode)
     #https://github.com/pytorch/pytorch/issues/6900
-    if  str(mode,encoding="gbk") == "linear": #mode=="linear":
+    if  mode=="linear":
         # factor = int(node.attrs["scales"])
         # input_shape = graph.shape_dict[input_name]
         # channels = input_shape[1]
@@ -424,7 +434,7 @@ def _convert_upsample(node,graph,err):
                         weight_filler=dict(type="bilinear")
                     ),param=dict(lr_mult=0,decay_mult=0))
     # https://github.com/jnulzl/caffe_plus 里面的upsample 是用的nearest插值
-    elif str(mode,encoding="gbk") == "nearest":
+    elif mode == "nearest":
         scales = node.input_tensors.get(node.inputs[1])
         height_scale = scales[2]
         width_scale = scales[3]
@@ -468,7 +478,7 @@ def _convert_resize(node,graph,err):
     output_name = str(node.outputs[0])
     mode = node.attrs["mode"]
     #https://github.com/pytorch/pytorch/issues/6900
-    if  str(mode,encoding="gbk") == "linear": #mode=="linear":
+    if  mode=="linear":
         # factor = int(node.attrs["scales"])
         # input_shape = graph.shape_dict[input_name]
         # channels = input_shape[1]
@@ -500,7 +510,7 @@ def _convert_resize(node,graph,err):
                         weight_filler=dict(type="bilinear")
                     ),param=dict(lr_mult=0,decay_mult=0))
     # https://github.com/jnulzl/caffe_plus 里面的upsample 是用的nearest插值
-    elif str(mode,encoding="gbk") == "nearest":
+    elif mode == "nearest":
         scales = node.input_tensors.get(node.inputs[1])
         height_scale = scales[2]
         width_scale = scales[3]
@@ -543,7 +553,7 @@ def _convert_resize_(node,graph,err):
     input_name = str(node.inputs[0])
     output_name = str(node.outputs[0])
     mode = node.attrs["mode"]
-    if str(mode,encoding="gbk") == "linear":
+    if mode == "linear":
         scales = node.input_tensors.get(node.inputs[1])
         layer = myf("Upsample", node_name, [input_name], [output_name],
                     upsample_param=dict(
