@@ -157,7 +157,7 @@ def getGraph(onnx_path):
 if __name__ == "__main__":
 
     #onnx_path = "/workspace/yolov5/best-sim.onnx"
-    onnx_path = "/workspace/nnie/yolov5/best-sim.onnx"
+    onnx_path = "/workspace/yolov5/best-sim.onnx"
     prototxt_path = "./yolov5n.prototxt"
     caffemodel_path = "./yolov5n.caffemodel"
 
@@ -171,4 +171,7 @@ if __name__ == "__main__":
     #convertToCaffe(graph, prototxt_path, caffemodel_path, exis_focus=True, focus_concat_name="Concat_40")
     #convertToCaffe(graph, prototxt_path, caffemodel_path, focus_conv_name="Conv_41")
     convertToCaffe(graph, prototxt_path, caffemodel_path)
+
+    print("input:",  onnx_path)
+    print("output:", caffemodel_path)
 
