@@ -1,0 +1,2371 @@
+layer {
+  name: "images"
+  type: "Input"
+  top: "images"
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 640
+      dim: 640
+    }
+  }
+}
+layer {
+  name: "_model_0_conv_Conv"
+  type: "Convolution"
+  bottom: "images"
+  top: "/model.0/conv/Conv_output_0"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    pad_h: 2
+    pad_w: 2
+    kernel_h: 6
+    kernel_w: 6
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_0_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.0/conv/Conv_output_0"
+  top: "/model.0/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_0_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.0/conv/Conv_output_0"
+  bottom: "/model.0/act/Sigmoid_output_0"
+  top: "/model.0/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.0/act/Mul_output_0"
+  top: "/model.1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.1/conv/Conv_output_0"
+  top: "/model.1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.1/conv/Conv_output_0"
+  bottom: "/model.1/act/Sigmoid_output_0"
+  top: "/model.1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_2_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.1/act/Mul_output_0"
+  top: "/model.2/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_2_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.2/cv1/conv/Conv_output_0"
+  top: "/model.2/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_2_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.2/cv1/conv/Conv_output_0"
+  bottom: "/model.2/cv1/act/Sigmoid_output_0"
+  top: "/model.2/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_2_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.2/cv1/act/Mul_output_0"
+  top: "/model.2/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_2_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.2/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.2/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_2_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.2/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.2/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.2/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_2_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.2/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.2/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_2_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.2/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.2/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_2_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.2/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.2/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.2/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_2_m_m_0_Add"
+  type: "Eltwise"
+  bottom: "/model.2/cv1/act/Mul_output_0"
+  bottom: "/model.2/m/m.0/cv2/act/Mul_output_0"
+  top: "/model.2/m/m.0/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_2_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.1/act/Mul_output_0"
+  top: "/model.2/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 16
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_2_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.2/cv2/conv/Conv_output_0"
+  top: "/model.2/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_2_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.2/cv2/conv/Conv_output_0"
+  bottom: "/model.2/cv2/act/Sigmoid_output_0"
+  top: "/model.2/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_2_Concat"
+  type: "Concat"
+  bottom: "/model.2/m/m.0/Add_output_0"
+  bottom: "/model.2/cv2/act/Mul_output_0"
+  top: "/model.2/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_2_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.2/Concat_output_0"
+  top: "/model.2/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_2_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.2/cv3/conv/Conv_output_0"
+  top: "/model.2/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_2_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.2/cv3/conv/Conv_output_0"
+  bottom: "/model.2/cv3/act/Sigmoid_output_0"
+  top: "/model.2/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.2/cv3/act/Mul_output_0"
+  top: "/model.3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.3/conv/Conv_output_0"
+  top: "/model.3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.3/conv/Conv_output_0"
+  bottom: "/model.3/act/Sigmoid_output_0"
+  top: "/model.3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.3/act/Mul_output_0"
+  top: "/model.4/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/cv1/conv/Conv_output_0"
+  top: "/model.4/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/cv1/conv/Conv_output_0"
+  bottom: "/model.4/cv1/act/Sigmoid_output_0"
+  top: "/model.4/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.4/cv1/act/Mul_output_0"
+  top: "/model.4/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.4/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.4/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.4/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.4/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.4/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.4/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.4/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.4/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_m_m_0_Add"
+  type: "Eltwise"
+  bottom: "/model.4/cv1/act/Mul_output_0"
+  bottom: "/model.4/m/m.0/cv2/act/Mul_output_0"
+  top: "/model.4/m/m.0/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_4_m_m_1_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.4/m/m.0/Add_output_0"
+  top: "/model.4/m/m.1/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_m_m_1_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/m/m.1/cv1/conv/Conv_output_0"
+  top: "/model.4/m/m.1/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_m_m_1_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/m/m.1/cv1/conv/Conv_output_0"
+  bottom: "/model.4/m/m.1/cv1/act/Sigmoid_output_0"
+  top: "/model.4/m/m.1/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_m_m_1_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.4/m/m.1/cv1/act/Mul_output_0"
+  top: "/model.4/m/m.1/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_m_m_1_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/m/m.1/cv2/conv/Conv_output_0"
+  top: "/model.4/m/m.1/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_m_m_1_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/m/m.1/cv2/conv/Conv_output_0"
+  bottom: "/model.4/m/m.1/cv2/act/Sigmoid_output_0"
+  top: "/model.4/m/m.1/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_m_m_1_Add"
+  type: "Eltwise"
+  bottom: "/model.4/m/m.0/Add_output_0"
+  bottom: "/model.4/m/m.1/cv2/act/Mul_output_0"
+  top: "/model.4/m/m.1/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_4_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.3/act/Mul_output_0"
+  top: "/model.4/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/cv2/conv/Conv_output_0"
+  top: "/model.4/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/cv2/conv/Conv_output_0"
+  bottom: "/model.4/cv2/act/Sigmoid_output_0"
+  top: "/model.4/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_4_Concat"
+  type: "Concat"
+  bottom: "/model.4/m/m.1/Add_output_0"
+  bottom: "/model.4/cv2/act/Mul_output_0"
+  top: "/model.4/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_4_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.4/Concat_output_0"
+  top: "/model.4/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_4_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.4/cv3/conv/Conv_output_0"
+  top: "/model.4/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_4_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.4/cv3/conv/Conv_output_0"
+  bottom: "/model.4/cv3/act/Sigmoid_output_0"
+  top: "/model.4/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_5_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.4/cv3/act/Mul_output_0"
+  top: "/model.5/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_5_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.5/conv/Conv_output_0"
+  top: "/model.5/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_5_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.5/conv/Conv_output_0"
+  bottom: "/model.5/act/Sigmoid_output_0"
+  top: "/model.5/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.5/act/Mul_output_0"
+  top: "/model.6/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/cv1/conv/Conv_output_0"
+  top: "/model.6/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/cv1/conv/Conv_output_0"
+  bottom: "/model.6/cv1/act/Sigmoid_output_0"
+  top: "/model.6/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/cv1/act/Mul_output_0"
+  top: "/model.6/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.6/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.6/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.6/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.6/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.6/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.6/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.6/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_0_Add"
+  type: "Eltwise"
+  bottom: "/model.6/cv1/act/Mul_output_0"
+  bottom: "/model.6/m/m.0/cv2/act/Mul_output_0"
+  top: "/model.6/m/m.0/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_6_m_m_1_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/m/m.0/Add_output_0"
+  top: "/model.6/m/m.1/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_m_m_1_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/m/m.1/cv1/conv/Conv_output_0"
+  top: "/model.6/m/m.1/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_m_m_1_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.1/cv1/conv/Conv_output_0"
+  bottom: "/model.6/m/m.1/cv1/act/Sigmoid_output_0"
+  top: "/model.6/m/m.1/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_1_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/m/m.1/cv1/act/Mul_output_0"
+  top: "/model.6/m/m.1/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_m_m_1_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/m/m.1/cv2/conv/Conv_output_0"
+  top: "/model.6/m/m.1/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_m_m_1_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.1/cv2/conv/Conv_output_0"
+  bottom: "/model.6/m/m.1/cv2/act/Sigmoid_output_0"
+  top: "/model.6/m/m.1/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_1_Add"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.0/Add_output_0"
+  bottom: "/model.6/m/m.1/cv2/act/Mul_output_0"
+  top: "/model.6/m/m.1/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_6_m_m_2_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/m/m.1/Add_output_0"
+  top: "/model.6/m/m.2/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_m_m_2_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/m/m.2/cv1/conv/Conv_output_0"
+  top: "/model.6/m/m.2/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_m_m_2_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.2/cv1/conv/Conv_output_0"
+  bottom: "/model.6/m/m.2/cv1/act/Sigmoid_output_0"
+  top: "/model.6/m/m.2/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_2_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/m/m.2/cv1/act/Mul_output_0"
+  top: "/model.6/m/m.2/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_m_m_2_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/m/m.2/cv2/conv/Conv_output_0"
+  top: "/model.6/m/m.2/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_m_m_2_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.2/cv2/conv/Conv_output_0"
+  bottom: "/model.6/m/m.2/cv2/act/Sigmoid_output_0"
+  top: "/model.6/m/m.2/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_m_m_2_Add"
+  type: "Eltwise"
+  bottom: "/model.6/m/m.1/Add_output_0"
+  bottom: "/model.6/m/m.2/cv2/act/Mul_output_0"
+  top: "/model.6/m/m.2/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_6_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.5/act/Mul_output_0"
+  top: "/model.6/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/cv2/conv/Conv_output_0"
+  top: "/model.6/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/cv2/conv/Conv_output_0"
+  bottom: "/model.6/cv2/act/Sigmoid_output_0"
+  top: "/model.6/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_6_Concat"
+  type: "Concat"
+  bottom: "/model.6/m/m.2/Add_output_0"
+  bottom: "/model.6/cv2/act/Mul_output_0"
+  top: "/model.6/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_6_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/Concat_output_0"
+  top: "/model.6/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_6_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.6/cv3/conv/Conv_output_0"
+  top: "/model.6/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_6_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.6/cv3/conv/Conv_output_0"
+  bottom: "/model.6/cv3/act/Sigmoid_output_0"
+  top: "/model.6/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_7_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.6/cv3/act/Mul_output_0"
+  top: "/model.7/conv/Conv_output_0"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_7_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.7/conv/Conv_output_0"
+  top: "/model.7/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_7_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.7/conv/Conv_output_0"
+  bottom: "/model.7/act/Sigmoid_output_0"
+  top: "/model.7/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_8_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.7/act/Mul_output_0"
+  top: "/model.8/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_8_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.8/cv1/conv/Conv_output_0"
+  top: "/model.8/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_8_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.8/cv1/conv/Conv_output_0"
+  bottom: "/model.8/cv1/act/Sigmoid_output_0"
+  top: "/model.8/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_8_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.8/cv1/act/Mul_output_0"
+  top: "/model.8/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_8_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.8/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.8/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_8_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.8/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.8/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.8/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_8_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.8/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.8/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_8_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.8/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.8/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_8_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.8/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.8/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.8/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_8_m_m_0_Add"
+  type: "Eltwise"
+  bottom: "/model.8/cv1/act/Mul_output_0"
+  bottom: "/model.8/m/m.0/cv2/act/Mul_output_0"
+  top: "/model.8/m/m.0/Add_output_0"
+  eltwise_param {
+    operation: SUM
+  }
+}
+layer {
+  name: "_model_8_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.7/act/Mul_output_0"
+  top: "/model.8/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_8_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.8/cv2/conv/Conv_output_0"
+  top: "/model.8/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_8_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.8/cv2/conv/Conv_output_0"
+  bottom: "/model.8/cv2/act/Sigmoid_output_0"
+  top: "/model.8/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_8_Concat"
+  type: "Concat"
+  bottom: "/model.8/m/m.0/Add_output_0"
+  bottom: "/model.8/cv2/act/Mul_output_0"
+  top: "/model.8/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_8_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.8/Concat_output_0"
+  top: "/model.8/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_8_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.8/cv3/conv/Conv_output_0"
+  top: "/model.8/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_8_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.8/cv3/conv/Conv_output_0"
+  bottom: "/model.8/cv3/act/Sigmoid_output_0"
+  top: "/model.8/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_9_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.8/cv3/act/Mul_output_0"
+  top: "/model.9/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_9_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.9/cv1/conv/Conv_output_0"
+  top: "/model.9/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_9_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.9/cv1/conv/Conv_output_0"
+  bottom: "/model.9/cv1/act/Sigmoid_output_0"
+  top: "/model.9/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_9_m_MaxPool"
+  type: "Pooling"
+  bottom: "/model.9/cv1/act/Mul_output_0"
+  top: "/model.9/m/MaxPool_output_0"
+  pooling_param {
+    pool: MAX
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    pad_h: 2
+    pad_w: 2
+  }
+}
+layer {
+  name: "_model_9_m_1_MaxPool"
+  type: "Pooling"
+  bottom: "/model.9/m/MaxPool_output_0"
+  top: "/model.9/m_1/MaxPool_output_0"
+  pooling_param {
+    pool: MAX
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    pad_h: 2
+    pad_w: 2
+  }
+}
+layer {
+  name: "_model_9_m_2_MaxPool"
+  type: "Pooling"
+  bottom: "/model.9/m_1/MaxPool_output_0"
+  top: "/model.9/m_2/MaxPool_output_0"
+  pooling_param {
+    pool: MAX
+    kernel_h: 5
+    kernel_w: 5
+    stride_h: 1
+    stride_w: 1
+    pad_h: 2
+    pad_w: 2
+  }
+}
+layer {
+  name: "_model_9_Concat"
+  type: "Concat"
+  bottom: "/model.9/cv1/act/Mul_output_0"
+  bottom: "/model.9/m/MaxPool_output_0"
+  bottom: "/model.9/m_1/MaxPool_output_0"
+  bottom: "/model.9/m_2/MaxPool_output_0"
+  top: "/model.9/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_9_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.9/Concat_output_0"
+  top: "/model.9/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_9_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.9/cv2/conv/Conv_output_0"
+  top: "/model.9/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_9_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.9/cv2/conv/Conv_output_0"
+  bottom: "/model.9/cv2/act/Sigmoid_output_0"
+  top: "/model.9/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_10_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.9/cv2/act/Mul_output_0"
+  top: "/model.10/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_10_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.10/conv/Conv_output_0"
+  top: "/model.10/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_10_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.10/conv/Conv_output_0"
+  bottom: "/model.10/act/Sigmoid_output_0"
+  top: "/model.10/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_11_ConvTranspose"
+  type: "Deconvolution"
+  bottom: "/model.10/act/Mul_output_0"
+  top: "/model.11/ConvTranspose_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 2
+    kernel_w: 2
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "_model_12_Concat"
+  type: "Concat"
+  bottom: "/model.11/ConvTranspose_output_0"
+  bottom: "/model.6/cv3/act/Mul_output_0"
+  top: "/model.12/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_13_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.12/Concat_output_0"
+  top: "/model.13/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_13_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.13/cv1/conv/Conv_output_0"
+  top: "/model.13/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_13_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.13/cv1/conv/Conv_output_0"
+  bottom: "/model.13/cv1/act/Sigmoid_output_0"
+  top: "/model.13/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_13_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.13/cv1/act/Mul_output_0"
+  top: "/model.13/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_13_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.13/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.13/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_13_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.13/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.13/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.13/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_13_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.13/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.13/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_13_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.13/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.13/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_13_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.13/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.13/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.13/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_13_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.12/Concat_output_0"
+  top: "/model.13/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_13_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.13/cv2/conv/Conv_output_0"
+  top: "/model.13/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_13_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.13/cv2/conv/Conv_output_0"
+  bottom: "/model.13/cv2/act/Sigmoid_output_0"
+  top: "/model.13/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_13_Concat"
+  type: "Concat"
+  bottom: "/model.13/m/m.0/cv2/act/Mul_output_0"
+  bottom: "/model.13/cv2/act/Mul_output_0"
+  top: "/model.13/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_13_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.13/Concat_output_0"
+  top: "/model.13/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_13_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.13/cv3/conv/Conv_output_0"
+  top: "/model.13/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_13_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.13/cv3/conv/Conv_output_0"
+  bottom: "/model.13/cv3/act/Sigmoid_output_0"
+  top: "/model.13/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_14_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.13/cv3/act/Mul_output_0"
+  top: "/model.14/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_14_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.14/conv/Conv_output_0"
+  top: "/model.14/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_14_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.14/conv/Conv_output_0"
+  bottom: "/model.14/act/Sigmoid_output_0"
+  top: "/model.14/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_15_ConvTranspose"
+  type: "Deconvolution"
+  bottom: "/model.14/act/Mul_output_0"
+  top: "/model.15/ConvTranspose_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 2
+    kernel_w: 2
+    stride_h: 2
+    stride_w: 2
+  }
+}
+layer {
+  name: "_model_16_Concat"
+  type: "Concat"
+  bottom: "/model.15/ConvTranspose_output_0"
+  bottom: "/model.4/cv3/act/Mul_output_0"
+  top: "/model.16/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_17_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.16/Concat_output_0"
+  top: "/model.17/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_17_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.17/cv1/conv/Conv_output_0"
+  top: "/model.17/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_17_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.17/cv1/conv/Conv_output_0"
+  bottom: "/model.17/cv1/act/Sigmoid_output_0"
+  top: "/model.17/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_17_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.17/cv1/act/Mul_output_0"
+  top: "/model.17/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_17_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.17/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.17/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_17_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.17/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.17/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.17/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_17_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.17/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.17/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_17_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.17/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.17/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_17_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.17/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.17/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.17/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_17_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.16/Concat_output_0"
+  top: "/model.17/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 32
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_17_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.17/cv2/conv/Conv_output_0"
+  top: "/model.17/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_17_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.17/cv2/conv/Conv_output_0"
+  bottom: "/model.17/cv2/act/Sigmoid_output_0"
+  top: "/model.17/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_17_Concat"
+  type: "Concat"
+  bottom: "/model.17/m/m.0/cv2/act/Mul_output_0"
+  bottom: "/model.17/cv2/act/Mul_output_0"
+  top: "/model.17/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_17_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.17/Concat_output_0"
+  top: "/model.17/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_17_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.17/cv3/conv/Conv_output_0"
+  top: "/model.17/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_17_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.17/cv3/conv/Conv_output_0"
+  bottom: "/model.17/cv3/act/Sigmoid_output_0"
+  top: "/model.17/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_18_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.17/cv3/act/Mul_output_0"
+  top: "/model.18/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_18_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.18/conv/Conv_output_0"
+  top: "/model.18/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_18_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.18/conv/Conv_output_0"
+  bottom: "/model.18/act/Sigmoid_output_0"
+  top: "/model.18/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_19_Concat"
+  type: "Concat"
+  bottom: "/model.18/act/Mul_output_0"
+  bottom: "/model.14/act/Mul_output_0"
+  top: "/model.19/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_20_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.19/Concat_output_0"
+  top: "/model.20/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_20_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.20/cv1/conv/Conv_output_0"
+  top: "/model.20/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_20_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.20/cv1/conv/Conv_output_0"
+  bottom: "/model.20/cv1/act/Sigmoid_output_0"
+  top: "/model.20/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_20_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.20/cv1/act/Mul_output_0"
+  top: "/model.20/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_20_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.20/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.20/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_20_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.20/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.20/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.20/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_20_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.20/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.20/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_20_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.20/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.20/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_20_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.20/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.20/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.20/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_20_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.19/Concat_output_0"
+  top: "/model.20/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 64
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_20_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.20/cv2/conv/Conv_output_0"
+  top: "/model.20/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_20_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.20/cv2/conv/Conv_output_0"
+  bottom: "/model.20/cv2/act/Sigmoid_output_0"
+  top: "/model.20/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_20_Concat"
+  type: "Concat"
+  bottom: "/model.20/m/m.0/cv2/act/Mul_output_0"
+  bottom: "/model.20/cv2/act/Mul_output_0"
+  top: "/model.20/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_20_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.20/Concat_output_0"
+  top: "/model.20/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_20_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.20/cv3/conv/Conv_output_0"
+  top: "/model.20/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_20_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.20/cv3/conv/Conv_output_0"
+  bottom: "/model.20/cv3/act/Sigmoid_output_0"
+  top: "/model.20/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_21_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.20/cv3/act/Mul_output_0"
+  top: "/model.21/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 2
+    stride_w: 2
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_21_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.21/conv/Conv_output_0"
+  top: "/model.21/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_21_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.21/conv/Conv_output_0"
+  bottom: "/model.21/act/Sigmoid_output_0"
+  top: "/model.21/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_22_Concat"
+  type: "Concat"
+  bottom: "/model.21/act/Mul_output_0"
+  bottom: "/model.10/act/Mul_output_0"
+  top: "/model.22/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_23_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.22/Concat_output_0"
+  top: "/model.23/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_23_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.23/cv1/conv/Conv_output_0"
+  top: "/model.23/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_23_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.23/cv1/conv/Conv_output_0"
+  bottom: "/model.23/cv1/act/Sigmoid_output_0"
+  top: "/model.23/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_23_m_m_0_cv1_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.23/cv1/act/Mul_output_0"
+  top: "/model.23/m/m.0/cv1/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_23_m_m_0_cv1_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.23/m/m.0/cv1/conv/Conv_output_0"
+  top: "/model.23/m/m.0/cv1/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_23_m_m_0_cv1_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.23/m/m.0/cv1/conv/Conv_output_0"
+  bottom: "/model.23/m/m.0/cv1/act/Sigmoid_output_0"
+  top: "/model.23/m/m.0/cv1/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_23_m_m_0_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.23/m/m.0/cv1/act/Mul_output_0"
+  top: "/model.23/m/m.0/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 1
+    pad_w: 1
+    kernel_h: 3
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_23_m_m_0_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.23/m/m.0/cv2/conv/Conv_output_0"
+  top: "/model.23/m/m.0/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_23_m_m_0_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.23/m/m.0/cv2/conv/Conv_output_0"
+  bottom: "/model.23/m/m.0/cv2/act/Sigmoid_output_0"
+  top: "/model.23/m/m.0/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_23_cv2_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.22/Concat_output_0"
+  top: "/model.23/cv2/conv/Conv_output_0"
+  convolution_param {
+    num_output: 128
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_23_cv2_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.23/cv2/conv/Conv_output_0"
+  top: "/model.23/cv2/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_23_cv2_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.23/cv2/conv/Conv_output_0"
+  bottom: "/model.23/cv2/act/Sigmoid_output_0"
+  top: "/model.23/cv2/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_23_Concat"
+  type: "Concat"
+  bottom: "/model.23/m/m.0/cv2/act/Mul_output_0"
+  bottom: "/model.23/cv2/act/Mul_output_0"
+  top: "/model.23/Concat_output_0"
+  concat_param {
+    axis: 1
+  }
+}
+layer {
+  name: "_model_23_cv3_conv_Conv"
+  type: "Convolution"
+  bottom: "/model.23/Concat_output_0"
+  top: "/model.23/cv3/conv/Conv_output_0"
+  convolution_param {
+    num_output: 256
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_23_cv3_act_Sigmoid"
+  type: "Sigmoid"
+  bottom: "/model.23/cv3/conv/Conv_output_0"
+  top: "/model.23/cv3/act/Sigmoid_output_0"
+}
+layer {
+  name: "_model_23_cv3_act_Mul"
+  type: "Eltwise"
+  bottom: "/model.23/cv3/conv/Conv_output_0"
+  bottom: "/model.23/cv3/act/Sigmoid_output_0"
+  top: "/model.23/cv3/act/Mul_output_0"
+  eltwise_param {
+    operation: PROD
+  }
+}
+layer {
+  name: "_model_24_m_0_Conv"
+  type: "Convolution"
+  bottom: "/model.17/cv3/act/Mul_output_0"
+  top: "/model.24/m.0/Conv_output_0"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_24_Reshape"
+  type: "Reshape"
+  bottom: "/model.24/m.0/Conv_output_0"
+  top: "/model.24/Reshape_output_0"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 8
+      dim: 80
+      dim: 80
+    }
+  }
+}
+layer {
+  name: "_model_24_Transpose"
+  type: "Permute"
+  bottom: "/model.24/Reshape_output_0"
+  top: "output0"
+  permute_param {
+    order: 0
+    order: 1
+    order: 3
+    order: 4
+    order: 2
+  }
+}
+layer {
+  name: "_model_24_m_1_Conv"
+  type: "Convolution"
+  bottom: "/model.20/cv3/act/Mul_output_0"
+  top: "/model.24/m.1/Conv_output_0"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_24_Reshape_1"
+  type: "Reshape"
+  bottom: "/model.24/m.1/Conv_output_0"
+  top: "/model.24/Reshape_1_output_0"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 8
+      dim: 40
+      dim: 40
+    }
+  }
+}
+layer {
+  name: "_model_24_Transpose_1"
+  type: "Permute"
+  bottom: "/model.24/Reshape_1_output_0"
+  top: "350"
+  permute_param {
+    order: 0
+    order: 1
+    order: 3
+    order: 4
+    order: 2
+  }
+}
+layer {
+  name: "_model_24_m_2_Conv"
+  type: "Convolution"
+  bottom: "/model.23/cv3/act/Mul_output_0"
+  top: "/model.24/m.2/Conv_output_0"
+  convolution_param {
+    num_output: 24
+    bias_term: true
+    group: 1
+    pad_h: 0
+    pad_w: 0
+    kernel_h: 1
+    kernel_w: 1
+    stride_h: 1
+    stride_w: 1
+    dilation: 1
+  }
+}
+layer {
+  name: "_model_24_Reshape_2"
+  type: "Reshape"
+  bottom: "/model.24/m.2/Conv_output_0"
+  top: "/model.24/Reshape_2_output_0"
+  reshape_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 8
+      dim: 20
+      dim: 20
+    }
+  }
+}
+layer {
+  name: "_model_24_Transpose_2"
+  type: "Permute"
+  bottom: "/model.24/Reshape_2_output_0"
+  top: "362"
+  permute_param {
+    order: 0
+    order: 1
+    order: 3
+    order: 4
+    order: 2
+  }
+}
+

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -196,7 +195,20 @@ def _convert_Add(node, graph, err):
     #print(input_name_list)
     #print("**********************************")
     layer = myf("Eltwise", node_name, input_name_list, [output_name], operation=P.Eltwise.SUM)
-    graph.channel_dims[output_name] = graph.channel_dims[input_name_list[0]]
+    try:
+        graph.channel_dims[output_name] = graph.channel_dims[input_name_list[0]]
+    except:
+        print("Node info:")
+        print("- Node name:", node.name)
+        print("- Op type:", node.op_type)
+        print("- Inputs:", node.inputs)
+        print("- Outputs:", node.outputs)
+        print("- Input tensors:", node.input_tensors)
+        print("- Attributes:", node.attrs)
+        print("- Channel dims in graph:", graph.channel_dims)
+        print("Warning: {} not found in channel_dims, using default".format(input_name_list[0]))
+        exit()
+        #graph.channel_dims[output_name] = 1
     return layer
 
 
@@ -402,7 +414,7 @@ def _convert_upsample(node,graph,err):
     mode = node.attrs["mode"]
     print(mode)
     #https://github.com/pytorch/pytorch/issues/6900
-    if  mode=="linear":
+    if  mode.decode('gbk') == "linear": #mode=="linear":
         # factor = int(node.attrs["scales"])
         # input_shape = graph.shape_dict[input_name]
         # channels = input_shape[1]
@@ -434,7 +446,7 @@ def _convert_upsample(node,graph,err):
                         weight_filler=dict(type="bilinear")
                     ),param=dict(lr_mult=0,decay_mult=0))
     # https://github.com/jnulzl/caffe_plus 里面的upsample 是用的nearest插值
-    elif mode == "nearest":
+    elif mode.decode('gbk') == "nearest":
         scales = node.input_tensors.get(node.inputs[1])
         height_scale = scales[2]
         width_scale = scales[3]
@@ -477,8 +489,11 @@ def _convert_resize(node,graph,err):
     input_name = str(node.inputs[0])
     output_name = str(node.outputs[0])
     mode = node.attrs["mode"]
+    
+    print("leoleo:", mode)
+    
     #https://github.com/pytorch/pytorch/issues/6900
-    if  mode=="linear":
+    if  mode.decode('gbk') == "linear": #mode=="linear":
         # factor = int(node.attrs["scales"])
         # input_shape = graph.shape_dict[input_name]
         # channels = input_shape[1]
@@ -510,8 +525,13 @@ def _convert_resize(node,graph,err):
                         weight_filler=dict(type="bilinear")
                     ),param=dict(lr_mult=0,decay_mult=0))
     # https://github.com/jnulzl/caffe_plus 里面的upsample 是用的nearest插值
-    elif mode == "nearest":
+    elif mode.decode('gbk') == "nearest":
         scales = node.input_tensors.get(node.inputs[1])
+        
+        print("scales:", scales)
+        print("scales type:", type(scales))
+        print("scales length:", len(scales))
+        
         height_scale = scales[2]
         width_scale = scales[3]
         layer = myf("Upsample", node_name, [input_name], [output_name],
@@ -553,7 +573,7 @@ def _convert_resize_(node,graph,err):
     input_name = str(node.inputs[0])
     output_name = str(node.outputs[0])
     mode = node.attrs["mode"]
-    if mode == "linear":
+    if mode.decode('gbk') == "linear":
         scales = node.input_tensors.get(node.inputs[1])
         layer = myf("Upsample", node_name, [input_name], [output_name],
                     upsample_param=dict(

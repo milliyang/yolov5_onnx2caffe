@@ -32,6 +32,7 @@ class ErrorHandling(object):
         from ._operators import _convert_custom
         return _convert_custom
       else:
+        print("node.op_type:", node.op_type)
         raise TypeError(
           "ONNX node of type {} is not supported.\n".format(node.op_type,)
         )
