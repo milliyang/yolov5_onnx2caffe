@@ -6,8 +6,8 @@ layer {
     shape {
       dim: 1
       dim: 3
-      dim: 640
-      dim: 640
+      dim: 416
+      dim: 416
     }
   }
 }
@@ -2258,8 +2258,8 @@ layer {
       dim: 1
       dim: 3
       dim: 8
-      dim: 80
-      dim: 80
+      dim: 52
+      dim: 52
     }
   }
 }
@@ -2304,8 +2304,8 @@ layer {
       dim: 1
       dim: 3
       dim: 8
-      dim: 40
-      dim: 40
+      dim: 26
+      dim: 26
     }
   }
 }
@@ -2350,8 +2350,8 @@ layer {
       dim: 1
       dim: 3
       dim: 8
-      dim: 20
-      dim: 20
+      dim: 13
+      dim: 13
     }
   }
 }

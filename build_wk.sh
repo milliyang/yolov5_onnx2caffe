@@ -39,7 +39,7 @@ function export_yolo5_onnx() {
 	cd $NNIE_DIR/yolov5
 	MYPYTHON=/home/leo/anaconda3/envs/nnie311/bin/python
 	#$MYPYTHON export.py --data coco.yaml --weights best.pt --batch 1 --img 640 640 --simplify --include onnx --opset 12
-	$MYPYTHON export.py --data coco.yaml --weights best.pt --batch 1 --img 640 640 --include onnx --opset 12
+	$MYPYTHON export.py --data coco.yaml --weights best.pt --batch 1 --img 416 416 --include onnx --opset 12
 	code=$?
 	#check OK
 	if [ $code -ne 0 ]; then
